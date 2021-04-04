@@ -14,21 +14,22 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/api', (req, res) => {
-	res.send('API is running');
+const API_PREFIX = process.env.API_PREFIX ?? '/api/v1';
+const PORT = process.env.PORT ?? 5000;
+
+app.get(`${API_PREFIX}`, (req, res) => {
+  res.send('API is running');
 });
 
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
+app.use(`${API_PREFIX}/products`, productRoutes);
+app.use(`${API_PREFIX}/users`, userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT ?? 5000;
-
 app.listen(
-	PORT,
-	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-	)
+  PORT,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
 );
