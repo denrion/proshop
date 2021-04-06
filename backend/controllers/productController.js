@@ -3,7 +3,7 @@ import asyncHandler from 'express-async-handler';
 
 /**
  * @description   Fetch All Products
- * @route         GET /api/products
+ * @route         GET /api/v1/products
  * @access        Public
  */
 export const getProducts = asyncHandler(async (req, res) => {
@@ -13,7 +13,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 
 /**
  * @description   Fetch Single Product
- * @route         GET /api/products/:id
+ * @route         GET /api/v1/products/:id
  * @access        Public
  */
 export const getProductById = asyncHandler(async (req, res) => {
