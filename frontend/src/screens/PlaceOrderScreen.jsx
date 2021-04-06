@@ -6,7 +6,7 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 
-const addDecimals = num => {
+export const addDecimals = num => {
   return (Math.round(num * 100) / 100).toFixed(2);
 };
 
@@ -76,7 +76,7 @@ const PlaceOrderScreen = () => {
 
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.lenght === 0 ? (
+              {cart.cartItems.length === 0 ? (
                 <Message>Your cart is emtpy</Message>
               ) : (
                 <ListGroup variant='flush'>
