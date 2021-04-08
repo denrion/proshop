@@ -1,3 +1,4 @@
+import path from 'path';
 import colors from 'colors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -7,6 +8,7 @@ import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -26,10 +28,14 @@ app.get(`${API_PREFIX}`, (req, res) => {
 app.use(`${API_PREFIX}/products`, productRoutes);
 app.use(`${API_PREFIX}/users`, userRoutes);
 app.use(`${API_PREFIX}/orders`, orderRoutes);
+app.use(`${API_PREFIX}/upload`, uploadRoutes);
 
 app.get(`${API_PREFIX}/config/paypal`, (req, res, next) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
+
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 app.use(notFound);
 app.use(errorHandler);
