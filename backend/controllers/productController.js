@@ -156,3 +156,14 @@ export const createProductReview = asyncHandler(async (req, res) => {
 
   res.status(201).json({ message: 'Review added' });
 });
+
+/**
+ * @description   Get Top Rated Products
+ * @route         POST /api/v1/products/top
+ * @access        Public
+ */
+export const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+});
